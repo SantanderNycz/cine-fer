@@ -1,0 +1,8 @@
+.claude
+
+# Arquivos grandes — não versionar
+ffmpeg.exe
+*.exe
+Movies/
+*.mkv
+*.mp4

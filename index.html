@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cine Fer</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+  <!-- Splash screen -->
+  <div id="splash">
+    <p>Bem-vinda ao<br /><span>Cine Fer</span></p>
+  </div>
+
+  <!-- Header -->
+  <header>
+    <div class="header-inner">
+      <h1 class="logo">Cine Fer</h1>
+      <div class="curtain-deco">
+        <span class="curtain curtain-left"></span>
+        <span class="curtain curtain-right"></span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main -->
+  <main>
+    <!-- Galeria de cartazes -->
+    <div class="poster-gallery">
+
+      <a class="poster" href="player.html?id=filme1">
+        <span class="poster-frame">
+          <span class="poster-bulbs"></span>
+          <span class="poster-img" style="background-image:url('assets/leaving1.jfif')"></span>
+        </span>
+        <span class="poster-name">Filme 1</span>
+      </a>
+
+      <a class="poster" href="player.html?id=filme2">
+        <span class="poster-frame">
+          <span class="poster-bulbs"></span>
+          <span class="poster-img" style="background-image:url('assets/leaving2.jpg')"></span>
+        </span>
+        <span class="poster-name">Filme 2</span>
+      </a>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; <span id="year"></span> Cine Fer &mdash; todos os direitos reservados ao amor da minha vida.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+
+</html>

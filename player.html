@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cine Fer</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="header-inner">
+      <a href="index.html" class="logo-link"><h1 class="logo">Cine Fer</h1></a>
+      <div class="curtain-deco">
+        <span class="curtain curtain-left"></span>
+        <span class="curtain curtain-right"></span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main / Sala de cinema -->
+  <main>
+    <div class="cinema-room">
+      <a href="index.html" id="back-btn">&larr; Voltar aos cartazes</a>
+      <h2 id="movie-title" class="movie-title"></h2>
+      <div class="screen-frame">
+        <div class="screen-glow"></div>
+        <video id="player" controls autoplay>
+          Seu navegador não suporta vídeo HTML5.
+        </video>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; <span id="year"></span> Cine Fer &mdash; todos os direitos reservados ao amor da minha vida.</p>
+  </footer>
+
+  <script src="movies.js"></script>
+  <script src="player.js"></script>
+</body>
+
+</html>

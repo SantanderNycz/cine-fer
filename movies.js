@@ -9,8 +9,7 @@ const MOVIES = {
   },
   filme2: {
     title: "Filme 2",
-    src: "Movies/filme2-web.mkv",
-    sub: "Movies/leg-ptbr.vtt",
-    label: "Português (BR) completa",
+    // Vídeo hospedado no YouTube — basta o ID (parte final da URL)
+    youtube: "eyQy7ywCbPM",
   },
 };

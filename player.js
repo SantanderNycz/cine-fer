@@ -10,6 +10,24 @@ const movie = MOVIES[id];
 
 if (!movie) {
   titleEl.textContent = "Filme não encontrado";
+} else if (movie.youtube) {
+  // ── Vídeo hospedado no YouTube: usa o player embutido ──
+  titleEl.textContent = movie.title;
+  document.title = "Cine Fer - " + movie.title;
+
+  const iframe = document.createElement("iframe");
+  iframe.src =
+    "https://www.youtube.com/embed/" +
+    movie.youtube +
+    "?rel=0&modestbranding=1&cc_lang_pref=pt&cc_load_policy=1";
+  iframe.title = movie.title;
+  iframe.allow =
+    "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+  iframe.allowFullscreen = true;
+  iframe.className = "yt-frame";
+
+  // Substitui o <video> pelo iframe dentro da moldura
+  video.replaceWith(iframe);
 } else {
   titleEl.textContent = movie.title;
   document.title = "Cine Fer - " + movie.title;

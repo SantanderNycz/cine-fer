@@ -199,12 +199,14 @@ main {
   z-index: 1;
 }
 
-video {
+video,
+.yt-frame {
   display: block;
   width: 100%;
   aspect-ratio: 16 / 9;
   background: #000;
   outline: none;
+  border: 0;
 }
 
 /* ── Galeria de cartazes ── */

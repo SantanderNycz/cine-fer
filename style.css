@@ -20,12 +20,12 @@
   --bg: #0a0a0a;
   --surface: #111;
   --border: #222;
-  --accent: #c8a84b;
+  --accent: #e0e0e0;
   --text: #e0e0e0;
   --muted: #666;
   --curtain: #1a0505;
   --curtain-dark: #0e0303;
-  --glow: rgba(200, 168, 75, 0.18);
+  --glow: rgba(255, 42, 44, 0.2);
 }
 
 html,
@@ -102,29 +102,14 @@ header {
   color: var(--accent);
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  text-shadow: 0 0 30px rgba(200, 168, 75, 0.4);
+  text-shadow: 0 0 30px rgba(255, 42, 44, 0.2);
   position: relative;
   z-index: 1;
 }
 
-/* Decorative curtain strips in header */
+/* Cortinas decorativas removidas — header com cor sólida */
 .curtain-deco {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  justify-content: space-between;
-  pointer-events: none;
-}
-.curtain {
-  width: 60px;
-  height: 100%;
-  background: repeating-linear-gradient(
-    180deg,
-    var(--curtain) 0px,
-    var(--curtain-dark) 18px,
-    var(--curtain) 36px
-  );
-  opacity: 0.55;
+  display: none;
 }
 
 /* ── Main / Cinema room ── */
@@ -133,7 +118,7 @@ main {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 2.5rem 1rem;
+  padding: 1rem;
   background:
     radial-gradient(
       ellipse 70% 40% at 50% 100%,
@@ -209,7 +194,241 @@ video,
   border: 0;
 }
 
-/* ── Galeria de cartazes ── */
+/* ── Sala de cinema (página do player com foto de fundo) ── */
+main.hall {
+  position: relative;
+  flex-direction: column;
+  background: #000;
+  padding: 1rem;
+  gap: 0.8rem;
+}
+
+.hall-photo {
+  position: relative;
+  margin: 0 auto;
+
+  /* Proporção real da Sala.png: 2000x1334 */
+  --sala-aspect: 2000 / 1334;
+
+  /* Zona transparente (tela branca) da foto onde o vídeo encaixa
+     (% relativos à imagem). */
+  --slot-left: 20.5%;
+  --slot-top: 21.5%;
+  --slot-width: 57.5%;
+  --slot-height: 31.5%;
+
+  width: 100%;
+  max-width: min(100%, calc((100vh - 150px) * (2000 / 1334)));
+  aspect-ratio: var(--sala-aspect);
+  background: #000 url("assets/Sala.png") center / cover no-repeat;
+}
+
+.screen-slot {
+  position: absolute;
+  left: var(--slot-left);
+  top: var(--slot-top);
+  width: var(--slot-width);
+  height: var(--slot-height);
+  overflow: hidden;
+  background: #000;
+}
+
+.screen-slot video,
+.screen-slot .yt-frame {
+  width: 100%;
+  height: 100%;
+  aspect-ratio: auto;
+  object-fit: contain;
+}
+
+/* ── Cenário CSS antigo (não usado com a foto, mantido como fallback) ── */
+main.hall.hall-css {
+  overflow: hidden;
+  perspective: 1100px;
+}
+
+.hall-scene {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Teto com painéis de luz, recuando em perspectiva */
+.hall-ceiling {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 150%;
+  height: 40%;
+  clip-path: polygon(0 0, 100% 0, 70% 100%, 30% 100%);
+  background:
+    repeating-linear-gradient(
+      90deg,
+      transparent 0 70px,
+      rgba(120, 130, 160, 0.05) 70px 76px
+    ),
+    repeating-linear-gradient(
+      0deg,
+      transparent 0 46px,
+      rgba(120, 130, 160, 0.05) 46px 52px
+    ),
+    linear-gradient(#14141d, #08080f);
+}
+/* Painéis de luz embutidos no teto */
+.hall-ceiling::after {
+  content: "";
+  position: absolute;
+  inset: 12% 24% 30%;
+  background-image:
+    radial-gradient(
+      ellipse 40px 14px,
+      rgba(180, 195, 230, 0.22) 0%,
+      transparent 70%
+    ),
+    radial-gradient(
+      ellipse 40px 14px,
+      rgba(180, 195, 230, 0.22) 0%,
+      transparent 70%
+    );
+  background-size: 33% 50%;
+  background-position: 20% 20%, 70% 70%;
+  background-repeat: round;
+  filter: blur(0.5px);
+}
+
+/* Paredes laterais em perspectiva */
+.hall-wall {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 28%;
+}
+.hall-wall-left {
+  left: 0;
+  background: linear-gradient(90deg, #0d0d15, #060609);
+  clip-path: polygon(0 0, 100% 16%, 100% 84%, 0 100%);
+}
+.hall-wall-right {
+  right: 0;
+  background: linear-gradient(270deg, #0d0d15, #060609);
+  clip-path: polygon(0 16%, 100% 0, 100% 100%, 0 84%);
+}
+
+/* Luminárias de parede (sconces) */
+.sconce {
+  position: absolute;
+  width: 7px;
+  height: 44px;
+  border-radius: 5px;
+  background: linear-gradient(#fff2cc, #f0b95e);
+  box-shadow:
+    0 0 14px 4px rgba(255, 196, 110, 0.55),
+    0 0 40px 12px rgba(255, 170, 70, 0.18);
+}
+.hall-wall-left .sconce { right: 16%; }
+.hall-wall-right .sconce { left: 16%; }
+.hall-wall .sconce:nth-child(1) { top: 34%; }
+.hall-wall .sconce:nth-child(2) { top: 58%; }
+
+/* Chão / fundo inferior */
+.hall-floor {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 34%;
+  background: linear-gradient(#05050a 0%, #000 100%);
+}
+
+/* Fileiras de poltronas em silhueta */
+.hall-seats {
+  position: absolute;
+  left: 50%;
+  bottom: -10px;
+  transform: translateX(-50%);
+  width: 86%;
+  max-width: 760px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 1.4%;
+  z-index: 2;
+}
+.hall-seats span {
+  flex: 1;
+  height: 64px;
+  background: linear-gradient(#2a0e0e, #160606);
+  border-radius: 16px 16px 6px 6px;
+  box-shadow:
+    inset 0 8px 14px rgba(0, 0, 0, 0.55),
+    0 -2px 6px rgba(0, 0, 0, 0.6);
+}
+/* leve curvatura da fileira */
+.hall-seats span:nth-child(1),
+.hall-seats span:nth-child(8) { height: 80px; }
+.hall-seats span:nth-child(2),
+.hall-seats span:nth-child(7) { height: 72px; }
+.hall-seats span:nth-child(3),
+.hall-seats span:nth-child(6) { height: 66px; }
+
+/* A tela e os controles ficam acima do cenário */
+main.hall .cinema-room {
+  position: relative;
+  z-index: 3;
+}
+/* Brilho projetado da tela sobre a sala */
+main.hall .screen-frame {
+  box-shadow:
+    0 0 0 8px #0d0d0d,
+    0 0 0 10px #181818,
+    0 0 80px 20px rgba(120, 140, 200, 0.12),
+    0 0 200px 60px rgba(90, 110, 180, 0.1);
+}
+
+@media (max-width: 600px) {
+  .hall-seats span { height: 40px; }
+  .hall-seats span:nth-child(1),
+  .hall-seats span:nth-child(8) { height: 52px; }
+}
+
+/* ── Parede de cartazes (imagem de fundo + áreas clicáveis) ── */
+.poster-wall {
+  position: relative;
+  /* Cresce o máximo possível mantendo a proporção 2000x1335 da imagem,
+     limitada pela altura disponível (viewport menos header/footer). */
+  width: 100%;
+  max-width: min(100%, calc((100vh - 150px) * (2000 / 1335)));
+  margin: 0 auto;
+  line-height: 0;
+}
+
+.poster-wall-img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* Botão invisível sobre cada pôster */
+.poster-hit {
+  position: absolute;
+  display: block;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: box-shadow 0.2s ease, background-color 0.2s ease;
+}
+.poster-hit:hover {
+  background-color: rgba(255, 217, 138, 0.12);
+  box-shadow: 0 0 0 2px rgba(255, 217, 138, 0.7),
+    0 0 22px rgba(255, 200, 90, 0.45);
+}
+.poster-hit:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--accent);
+}
+
+/* ── Galeria de cartazes (antiga, mantida como fallback) ── */
 .poster-gallery {
   display: flex;
   flex-wrap: wrap;

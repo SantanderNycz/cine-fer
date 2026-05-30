@@ -10,6 +10,16 @@ const movie = MOVIES[id];
 
 if (!movie) {
   titleEl.textContent = "Filme não encontrado";
+} else if (!movie.drive && !movie.youtube && !movie.src) {
+  // Filme cadastrado, mas ainda sem fonte de vídeo definida
+  titleEl.textContent = movie.title + " — em breve";
+  document.title = "Cine Fer - " + movie.title;
+  video.replaceWith(
+    Object.assign(document.createElement("p"), {
+      className: "movie-title",
+      textContent: "Vídeo ainda não disponível.",
+    }),
+  );
 } else if (movie.drive) {
   // ── Vídeo hospedado no Google Drive: usa o player de preview ──
   titleEl.textContent = movie.title;

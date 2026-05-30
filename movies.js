@@ -9,7 +9,7 @@ const MOVIES = {
   },
   filme2: {
     title: "Filme 2",
-    // Vídeo hospedado no YouTube — basta o ID (parte final da URL)
-    youtube: "eyQy7ywCbPM",
+    // Vídeo no Google Drive — ID do arquivo
+    drive: "1UQcqhyVk6bXBJvnD_oXjOQkd8bH6eaQG",
   },
 };

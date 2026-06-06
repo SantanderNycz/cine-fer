@@ -1,14 +1,12 @@
-// Catálogo de filmes — edite aqui para adicionar/trocar filmes.
-// A "chave" (ex.: filme1) é usada no link: player.html?id=filme1
 const MOVIES = {
-  // Reservado — aguardando uma fonte legítima (upload próprio no YouTube/Vimeo,
-  // arquivo no Drive, ou embed oficial licenciado).
+
   filme1: {
-    title: "Leaving Neverland — Parte 1",
+    title: "The Drama",
+    drive: "19GROgQ6RC2MmJJyr_hVn6kUF3tRmy5SU",
   },
-  // Reservado — idem.
   filme2: {
-    title: "Leaving Neverland — Parte 2",
+    title: "Sonhos de Trem",
+    drive: "15T6_zv1VjDLPIuX-uKOZ_Yv8z079s5nt",
   },
   // Vídeo no Google Drive — ID do arquivo
   filme3: {

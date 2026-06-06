@@ -10,7 +10,7 @@ const movie = MOVIES[id];
 
 if (!movie) {
   titleEl.textContent = "Filme não encontrado";
-} else if (!movie.drive && !movie.youtube && !movie.src) {
+} else if (!movie.drive && !movie.youtube && !movie.src && !movie.embed) {
   // Filme cadastrado, mas ainda sem fonte de vídeo definida
   titleEl.textContent = movie.title + " — em breve";
   document.title = "Cine Fer - " + movie.title;
@@ -20,6 +20,23 @@ if (!movie) {
       textContent: "Vídeo ainda não disponível.",
     }),
   );
+} else if (movie.embed) {
+  // ── Embed oficial de uma plataforma (URL completa de incorporação) ──
+  // Funciona com serviços que fornecem link de /embed (YouTube, Vimeo,
+  // Dailymotion, Archive.org, etc.). Plataformas que bloqueiam iframe
+  // (Netflix, Max, Prime, Disney+) não exibem — limitação delas.
+  titleEl.textContent = movie.title;
+  document.title = "Cine Fer - " + movie.title;
+
+  const iframe = document.createElement("iframe");
+  iframe.src = movie.embed;
+  iframe.title = movie.title;
+  iframe.allow =
+    "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen";
+  iframe.allowFullscreen = true;
+  iframe.className = "yt-frame";
+
+  video.replaceWith(iframe);
 } else if (movie.drive) {
   // ── Vídeo hospedado no Google Drive: usa o player de preview ──
   titleEl.textContent = movie.title;

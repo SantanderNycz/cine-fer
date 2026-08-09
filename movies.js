@@ -4,7 +4,7 @@ const MOVIES = {
     drive: "1nAeY80V8zda0oZIASPOQqOpONwOjs0ue",
   },
   filme2: {
-    title: "Sonhos de Trem",
+    title: "Obsession",
     drive: "1v6kdCYW4_umfRl1gcmLo8FSxzNkuElvG",
   },
   // Vídeo no Google Drive — ID do arquivo
